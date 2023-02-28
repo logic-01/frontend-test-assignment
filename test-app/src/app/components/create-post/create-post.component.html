@@ -1,0 +1,37 @@
+<div class="form_container">
+  <form [formGroup]="form"
+        (ngSubmit)="onFormSubmit()">
+    <div class="mb-3">
+      <label for="userId"
+             class="form-label">UserId:</label>
+      <input type="text"
+             id="userId"
+             formControlName="userId">
+    </div>
+    <div class="mb-3">
+      <label for="title"
+             class="form-label">Title:</label>
+      <input type="text"
+             id="title"
+             formControlName="title">
+      <small *ngIf="title.errors?.['required'] && title.dirty"
+             class="error">Title is required</small>
+      <small *ngIf="title.errors?.['titleInvalid'] && title.dirty"
+             class="error">Please provide x at the start of title</small>
+    </div>
+    <div class="mb-3">
+      <label for="body"
+             class="form-label">Body:</label>
+      <textarea name=""
+                id="body"
+                cols="30"
+                rows="10"
+                formControlName="body"></textarea>
+      <small *ngIf="body.errors?.['required'] && body.dirty"
+             class="error">Body is required</small>
+    </div>
+    <button type="submit"
+            class="submit_btn"
+            [disabled]="form.invalid">Submit</button>
+  </form>
+</div>

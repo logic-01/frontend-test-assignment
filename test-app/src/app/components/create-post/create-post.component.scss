@@ -1,0 +1,37 @@
+form {
+  padding: 16px;
+  background-color: white;
+  input[type="text"],
+  textarea {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 12px 0;
+    display: inline-block;
+    border: none;
+    background: #dbe8d8;
+  }
+  small.error {
+    color: red;
+    font-size: 16px;
+  }
+  .submit_btn {
+    background-color: #c8df52;
+    color: black;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+
+    &:disabled {
+      background-color: #f1f1f1;
+      color: black;
+      opacity: 0.5;
+    }
+  }
+}
+
+.form_container {
+    height: 100%;
+}

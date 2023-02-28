@@ -1,0 +1,48 @@
+<div class="post_details_container" *ngIf="id">
+  <!-- Post -->
+  <div class="post_details" *ngIf="getpost(id) | async as post">
+    <div class="card">
+      <h5 class="card-header">Post By user#{{post.userId}}</h5>
+      <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+        <p class="card-text">{{post.body}}</p>
+      </div>
+    </div>
+  </div>
+  <!-- Post comments -->
+  <div class="post_comments" *ngIf="getcomments(id) | async as comments">
+    <div class="mb-3">Comments:</div>
+    <ng-container *ngFor="let comment of comments">
+      <ng-container [ngTemplateOutlet]="commentTemplate" [ngTemplateOutletContext]="{comment: comment}"></ng-container>
+    </ng-container>
+    <ng-container *ngIf="comments else noCommentTemplate">
+
+    </ng-container>
+  </div>
+  <img src="assets/arrow-left.svg"
+  alt="back"
+  width="24"
+  height="24"
+  title="Go back to Posts"
+  [routerLink]="['/post']"
+  >
+</div>
+
+<!-- Comments Template -->
+<ng-template #commentTemplate let-comment="comment">
+  <div class="card w-75 mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{comment.name}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{comment.email}}</h6>
+      <p class="card-text">{{comment.body}}</p>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noCommentTemplate>
+  <div class="card w-75 mb-3">
+    <div class="card-body">
+      <p class="card-text">Seems like there is no comments for this post</p>
+    </div>
+  </div>
+</ng-template>

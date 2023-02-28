@@ -1,0 +1,45 @@
+<div class="post_list_container">
+  <div class="filter_input">
+    <label for="post_filter"
+           class="form-label">Filter:</label>
+    <div class="filter_input_box">
+      <input type="text"
+             id="post_filter"
+             class="form-control"
+             placeholder="Filter by title"
+             #filter>
+      <img src="assets/x-circle.svg"
+           alt="clear"
+           width="16"
+           height="16"
+           [ngStyle]="{'display': !!filter.value ? null : 'none'}"
+           (click)="onFilterClearedClick()"
+           >
+    </div>
+  </div>
+  <ng-container *ngIf="postsList$ | async as postsList">
+    <div class="post_container">
+      <ng-container *ngIf="postsList.length">
+        <ng-container *ngFor="let post of postsList">
+          <div class="post_card">
+            <ng-container [ngTemplateOutlet]="postTemplate"
+                          [ngTemplateOutletContext]="{post: post}"></ng-container>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #postTemplate
+             let-post="post">
+  <div class="card">
+    <h5 class="card-header">{{post.id}}...Post By user#{{post.userId}}</h5>
+    <div class="card-body">
+      <h5 class="card-title">{{post.title}}</h5>
+      <p class="card-text">{{post.body}}</p>
+      <a [routerLink]="['/post', post.id]"
+         class="btn btn-primary">Details</a>
+    </div>
+  </div>
+</ng-template>
